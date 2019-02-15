@@ -1,0 +1,36 @@
+
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
+<Limit GET POST>
+#The next line modified by DenyIP
+order allow,deny
+#The next line modified by DenyIP
+#deny from all
+allow from all
+</Limit>
+<Limit PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+#AuthName openehr.org.es
+
+# friendly urls
+#redirect /publicaciones /cms2/cms/displayPageRO?pageId=9
+
+
+#  mod_rewrite in use
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} ^openehr\.org\.es$ [OR]
+#RewriteCond %{HTTP_HOST} ^www\.openehr\.org\.es$
+#RewriteRule ^curso$ "https\:\/\/docs\.google\.com\/spreadsheet\/viewform\?formkey\=dDlLUmpMX0pzaHJzZ21FMGVLN1dMUWc6MQ" [R=302,L]
+#RewriteRule ^cursoisis$ "https\:\/\/docs\.google\.com\/spreadsheet\/viewform\?formkey\=dDVvQ2I4U1VLbUdYLXR6cU5EWXl6U3c6MA" [R=302,L]
+
+# Si es un archivo fisico, dejarlo pasar.
+RewriteCond %{REQUEST_FILENAME} !-f
+# Todo va al punto de entrada
+RewriteRule (.*) ./index.php
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
